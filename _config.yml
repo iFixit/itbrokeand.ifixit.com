@@ -1,0 +1,6 @@
+pygments: true
+auto: true
+server: true
+lsi: false
+markdown: rdiscount
+paginate: 3

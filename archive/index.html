@@ -1,0 +1,12 @@
+---
+layout: default
+title: Archive
+---
+
+{% for page in site.posts %}
+	<div class="date">
+		{{ page.date | date: "%Y-%m-%d" }}
+	</div>
+	<a href="{{ page.url }}">{{ page.title }}</a><br />
+{% endfor %}
+

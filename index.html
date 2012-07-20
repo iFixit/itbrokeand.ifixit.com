@@ -3,15 +3,17 @@ layout: default
 ---
 
 {% for page in paginator.posts %}
-<div class="date">
-  {{ page.date | date: "%Y-%m-%d" }}
-</div>
-<h2>
-  <a href="{{ page.url }}">{{ page.title }}</a>
-</h2>
-{{ page.content | truncatewords: 130 }}
-<a href="{{ page.url }}">more</a>
-<br /><br />
+  {% unless page.draft %}
+    <div class="date">
+      {{ page.date | date: "%Y-%m-%d" }}
+    </div>
+    <h2>
+      <a href="{{ page.url }}">{{ page.title }}</a>
+    </h2>
+    {{ page.content | truncatewords: 130 }}
+    <a href="{{ page.url }}">more</a>
+    <br /><br />
+  {% endunless %}
 {% endfor %}
 
 <br /><br />

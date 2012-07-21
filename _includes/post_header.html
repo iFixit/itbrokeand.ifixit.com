@@ -1,6 +1,10 @@
-<div class="date">
-  {{ page.date | date: "%Y-%m-%d" }}
-</div>
 <h1>
   <a href="{{ page.url }}">{{ page.title }}</a>
 </h1>
+<div class="date">
+  {{ page.date | date: "%Y-%m-%d" }}
+  {% if page.author %}
+    <small>- {{ page.author }}</small>
+  {% endif %}
+</div>
+<br />

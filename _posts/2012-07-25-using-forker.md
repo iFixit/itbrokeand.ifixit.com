@@ -1,6 +1,6 @@
 ---
 layout: with-comments
-title: Using Forker in PHP
+title: "Forker: a PHP Library"
 author: Daniel Beardsley
 author_url: http://github.com/danielbeardsley
 ---

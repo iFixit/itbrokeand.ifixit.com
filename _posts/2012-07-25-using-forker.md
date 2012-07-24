@@ -6,10 +6,12 @@ author_url: http://github.com/danielbeardsley
 ---
 
 A while back we released [Forker](http://github.com/ifixit/Forker), a small PHP
-library that enables easy parallel processing.  
+library that enables easy parallel processing.  We've been using it in
+production for a couple of months now, so I figured it would be a good
+candidate for a first post.
 
 How We Use It
-------------
+-------------
 Right now, we use it for network IO operations.  Particularly, we use it to
 connect via SSH and execute commands on a bunch of machines in parallel.  This
 has decreased the time it takes us to deploy new code to 2-3 seconds, instead

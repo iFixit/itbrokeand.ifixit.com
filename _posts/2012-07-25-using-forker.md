@@ -10,7 +10,7 @@ library that enables easy parallel processing.
 How We Use It
 ------------
 Right now, we use it for network IO operations.  Particularly, we use it to
-connect via SSH and execute commands on a bunch of machines in paralell.  This
+connect via SSH and execute commands on a bunch of machines in parallel.  This
 has decreased the time it takes us to deploy new code to 2-3 seconds, instead
 of 2-3*n seconds that it took before.
 
@@ -104,7 +104,7 @@ protected static function fork() {
 ### mapStream()
 
 Up one more level there is the `mapStream()` function.
-This implements a typical map function over a provied array.
+This implements a typical map function over a provided array.
 The map function passes to the callback the array entry and a connected stream.
 The data written to the stream during each callback is read
 from the other end by the parent and returned from the original
@@ -132,7 +132,7 @@ protected static function mapStream($things, $callback) {
 The final public function 'map()' wraps the `mapStream()`
 function and allows the caller jsut to return a php
 object instead of writing to a stream.  Returned objects are serialized
-and written to the stream and then deserialzied before being returned
+and written to the stream and then deserialized before being returned
 in the resultant array.
 
 {% highlight php startinline %}

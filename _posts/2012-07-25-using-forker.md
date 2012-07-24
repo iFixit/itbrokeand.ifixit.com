@@ -2,6 +2,7 @@
 layout: with-comments
 title: Using Forker in PHP
 author: Daniel Beardsley
+author_url: http://github.com/danielbeardsley
 ---
 
 A while back we released [Forker](http://github.com/ifixit/Forker), a small PHP

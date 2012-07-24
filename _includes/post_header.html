@@ -4,7 +4,13 @@
 <div class="date">
   {{ page.date | date: "%Y-%m-%d" }}
   {% if page.author %}
-    <small>- {{ page.author }}</small>
+    <small>- 
+      {% if page.author_url %}
+        <a href="{{ page.author_url }}" rel='author'>{{ page.author }}</a>
+      {% else %}
+        {{ page.author }}
+      {% endif %}
+    </small>
   {% endif %}
 </div>
 <br />

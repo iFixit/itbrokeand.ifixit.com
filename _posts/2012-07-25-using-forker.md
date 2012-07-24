@@ -3,6 +3,11 @@ layout: with-comments
 title: "Forker: a PHP Library"
 author: Daniel Beardsley
 author_url: http://github.com/danielbeardsley
+summary: A while back we released [Forker](http://github.com/ifixit/Forker),
+         a small PHP library that enables easy parallel processing.  We've been
+         using it in production for a couple of months now, so I figured it
+         would be a good candidate for a first post.
+
 ---
 
 A while back we released [Forker](http://github.com/ifixit/Forker), a small PHP

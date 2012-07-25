@@ -138,7 +138,7 @@ protected static function mapStream($things, $callback) {
 {% endhighlight %}
 
 The final public function 'map()' wraps the `mapStream()`
-function and allows the caller jsut to return a php
+function and allows the caller to just return a php
 object instead of writing to a stream.  Returned objects are serialized
 and written to the stream and then deserialized before being returned
 in the resultant array.

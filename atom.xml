@@ -1,0 +1,26 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>It Broke And iFixit</title>
+ <link href="http://itbrokeand.ifixit.com/atom.xml" rel="self"/>
+ <link href="http://itbrokeand.ifixit.com"/>
+ <updated>{{ site.time | date_to_xmlschema }}</updated>
+ <id>http://itbrokeand.ifixit.com</id>
+ <author>
+   <name>Developers at iFixit.com</name>
+ </author>
+
+ {% for post in site.posts %}
+ <entry>
+   <title>{{ post.title }}</title>
+   <link href="http://itbrokeand.ifixit.com{{ post.url }}"/>
+   <updated>{{ post.date | date_to_xmlschema }}</updated>
+   <id>http://itbrokeand.ifixit.com{{ post.id }}</id>
+   <content type="html">{{ post.content | xml_escape }}</content>
+ </entry>
+ {% endfor %}
+ 
+</feed>

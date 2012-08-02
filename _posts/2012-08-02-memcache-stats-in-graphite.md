@@ -30,10 +30,10 @@ echo's to stdout too, in case you want to `log everything`.
 #!/bin/bash
 
 if [ "$1" != "report" ]; then
-   echo "Usage:"
+   echo "Usage:" >&2
    script="`basename $0`"
-   echo "  nohup $script report > /var/log/memcache-stats.log &"
-   exit
+   echo "  nohup $script report > /var/log/memcache-stats.log &" >&2
+   exit 1
 fi
 
 GRAPHITE_SERVER=localhost

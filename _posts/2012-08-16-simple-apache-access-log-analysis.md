@@ -15,6 +15,8 @@ handle variations very well, it's now a line of `awk`, `sort`, `uniq` and
 `grep` chained together with pipes and wrapped in a little bit of Ruby. :)
 
 <script src="https://gist.github.com/3252053.js?file=analyze_access_log.rb"></script>
+Here is [the Github gist][gist].
 
 [awstats]: http://awstats.sourceforge.net/
+[gist]: https://gist.github.com/3252053
 

@@ -8,6 +8,58 @@ summary: Use [Graphite](http://graphite.wikidot.com/) and
          stats in Graphite?  Bash has got your back.
 ---
 
+------
+### Update (08-25-2012) ###
+
+This concept has been extended further and genericized into a friendly bash
+component called [pipe-to-graphite](https://github.com/iFixit/pipe-to-graphite)
+that allows you to easily pipe the output of any script to graphite.  This has
+been [done before](https://github.com/BrightcoveOS/Diamond) and quite well, so
+I'd recommend using Diamond, but this was fun to hack on anyway.
+
+The memcache script is now MUCH simpler than the one below and allows for an
+optional "extended" mode that reports more stats:
+
+{% highlight bash %}
+#!/bin/bash
+argument="$1"
+(
+    sleep 1
+    [ "$argument" == "extended" ] &&
+      echo "stats slabs" &&
+      echo "stats items"
+    echo "stats"
+    sleep 1
+    echo "quit"
+) | telnet localhost 11211 2>/dev/null |
+grep STAT |
+grep -v version |
+sed -re 's/STAT (items:)?([0-9]+):/memcache.slabs.\2./' \
+     -e 's/STAT /memcache./'
+{% endhighlight %}
+
+There are also scripts included to monitor Gearman and Mysql.  
+You can clone the repo and start monitoring things quickly:
+
+{% highlight bash %}
+$ > git clone git://github.com/iFixit/pipe-to-graphite.git
+$ > cd pipe-to-graphite
+$ > ./pipe-to-graphite.sh scripts/memcache-stats.sh
+Running 'scripts/memcache-stats.sh' as a test.. SUCCESS
+
+Redirecting stdout to /dev/null so it doesn't mess up your
+terminal.  Redirect it somewhere else if you wan't to save it.
+
+Command: scripts/memcache-stats.sh
+is being piped to graphite every 10 seconds
+Background PID: 18637
+$ >
+{% endhighlight %}
+
+------
+
+### Original Post ###
+
 Use [Graphite](http://graphite.wikidot.com/) and
 [Memcache](http://memcached.org/)?  Want to track your memcache server
 stats in Graphite? This bash snippet is the answer and you'll end up

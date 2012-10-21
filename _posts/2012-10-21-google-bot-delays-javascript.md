@@ -23,7 +23,7 @@ It was an Ajax call, it would be invisible to users,
 nothing would appear broken.
 
 _But why were we seeing these errors?_
-Pages that are rendered now will never_ make that ajax call.
+Pages that are rendered now will _never_ make that ajax call.
 
 Ahah!, our [Varnish](https://www.varnish-cache.org/) cache
 keeps old pages around for a few minutes.
@@ -37,7 +37,7 @@ we were consistently seeing several per second like this:
     Oct 18 23:40:40 php: Unknown ajax response function: setTimezone in ... <<<|◼
 
 It took us a bit to realize that all the IPs were similar (`66.249.*.*`).
-A reverse lookup revealed that it's an IP block owned by Google.
+A reverse lookup revealed that it's an [IP block owned by Google](http://www.tcpiputils.com/browse/ip-address/66.249.76.39).
 In particular, it's a block used by the Goole bot for crawling the web.
 
 Pretty quickly we came to the conclusion that the Goole bot must
@@ -49,7 +49,7 @@ But we didn't realize how _long_ they waited in that queue.
 It's __now been 3 days__ and we're still seeing errors trickle through.
 
 This is a minor error and didn't really affect our customers at all.
-But we can iamgine other scenarios where using old html and old javascript
+But we can imagine other scenarios where using old html and old javascript
 could make our site non-functional.
 The Google bot could easily just assume all our pages were broken or missing content.
 

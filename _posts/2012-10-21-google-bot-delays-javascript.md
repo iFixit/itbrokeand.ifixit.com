@@ -13,14 +13,14 @@ __The Google bot delays execution of your javascript for hours and sometimes eve
 
 We inadvertently discovered this after making a _mistake_.
 We removed some code that reported a users current timezone to our servers via Ajax.
-It had been used to format times in a given users's timezone.
-It was old code and it was an old idea,
+It had been used to format times in a given user's timezone.
+It was old code and it was an old idea;
 we primarily use relative times now.
 
-### Woops
+### Whoops
 
 After deploying the code removal,
-Our error logs immediately started lighting up with: 
+our error logs immediately started lighting up with: 
 `Unknown ajax response function: setTimezone`.
 We knew this wasn't a huge deal.
 It was an Ajax call, it would be invisible to users,
@@ -46,7 +46,7 @@ In particular, it's a block used by the Goole bot for crawling the web.
 
 Pretty quickly we came to the conclusion that the Goole bot must
 execute javascript separate from (and after) downloading web pages.
-It makes sense when you're doing things at Google scale,
+It makes sense when you're doing things at Google scale;
 they must have a giant queue of downloaded pages whose javascript is waiting to be executed.
 But we didn't realize how _long_ they waited in that queue. 
 

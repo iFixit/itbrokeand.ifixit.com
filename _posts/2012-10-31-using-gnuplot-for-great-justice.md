@@ -8,7 +8,7 @@ summary: Gnuplot can be used to quickly draw ASCII graphs of information pulled
 ---
 
 We here at iFixit are big fans of [Graphite], but sometimes I want to plot data
-that hasn't made it's way into Graphite yet.  For instance, today I wanted to
+that hasn't made its way into Graphite yet.  For instance, today I wanted to
 see how our [CSRF] failures have changed over time.
 
 Since we log every failure, we can pull out instances pretty easily with

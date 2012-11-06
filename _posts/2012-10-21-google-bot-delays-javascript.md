@@ -42,9 +42,9 @@ We were now consistently seeing several per second like this:
 
 It took us a bit to realize that all the IPs were similar (`66.249.*.*`).
 A reverse lookup revealed that it's an [IP block owned by Google](http://www.tcpiputils.com/browse/ip-address/66.249.76.39).
-In particular, it's a block used by the Goole bot for crawling the web.
+In particular, it's a block used by the Google bot for crawling the web.
 
-Pretty quickly we came to the conclusion that the Goole bot must
+Pretty quickly we came to the conclusion that the Google bot must
 execute javascript separate from (and after) downloading web pages.
 It makes sense when you're doing things at Google scale;
 they must have a giant queue of downloaded pages whose javascript is waiting to be executed.

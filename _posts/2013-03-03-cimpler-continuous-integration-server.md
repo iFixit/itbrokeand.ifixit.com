@@ -61,7 +61,7 @@ so we get the positive **"Good to merge"** message and a link to the test log on
 ### Like this :)
 <img class="screenshot" src="/assets/build-success.png"/>
 
-### And sometimes this :(
+### Though sometimes like this :(
 <img class="screenshot" src="/assets/build-failed.png"/>
 
 

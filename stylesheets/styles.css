@@ -253,3 +253,9 @@ footer {
     color:#444;
   }
 }
+
+.screenshot {
+   -moz-border-radius: 25px;
+        border-radius: 25px;
+   border: 2px solid #eee;
+}

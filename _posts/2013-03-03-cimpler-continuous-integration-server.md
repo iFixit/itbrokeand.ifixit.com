@@ -8,9 +8,9 @@ summary: Cimpler is a continuous intergration server in node.js
 ---
 
 Because the world really needed another CI server, we made one.
-Checkout [cimpler on github][repo].
+Checkout [cimpler on github][repo] and feel free to contribute.
 
-At iFixit, we spent far too long
+At [iFixit](http://www.ifixit.com), we spent far too long
 trying to configure [Jenkins](http://jenkins-ci.org/)
 and its many plugins _just right_.
 Jenkins and friends ended up being unintuitive (at least for our purposes)

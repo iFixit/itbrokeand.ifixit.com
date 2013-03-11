@@ -16,15 +16,49 @@ and its many plugins _just right_.
 Jenkins and friends ended up being unintuitive (at least for our purposes)
 and had far more features than we needed.
 
-I love node.js and needed something simple, single-purpose, and extensible.
-So, late one night, I wrote [cimpler][repo]
+I love node.js and needed something simple, single-purpose, and extensible,
+you know, unix-style.
+So, late one night, I wrote [cimpler][repo].
 We've been using it in production since <time datetime="2012-10-08">Oct. 2012</time>
-and it's been rock solid (we haven't even bothered to move it out of a screen
-session).
+and it's been rock solid
+(we haven't even bothered to move it out of a screen session).
+
+## How iFixit Uses Cimpler
+
+1. The github plugin adds builds to the queue
+when it receives a [post-receive][hooks]
+notification from github.
+2. The git-build plugin takes builds off the queue,
+does some merging,
+and then runs a shell command that executes our test suite.
+3. We also have the github-commit-status plugin report the build results to github
+so we get the positive **"Good to merge"** message and a link to the test log on each of our pull requests.
+
+### Like this :)
+<img class="screenshot" src="/assets/build-success.png"/>
+
+### Though sometimes like this :(
+<img class="screenshot" src="/assets/build-failed.png"/>
+
+## Get it going
+
+{% highlight bash %}
+$ git clone https://github.com/danielbeardsley/cimpler.git
+$ cd cimpler
+$ # install dependencies
+$ npm install --production
+$ cp config.sample.js config.js
+$ # edit the config to your liking
+$ vim config.js
+$ # symlink the commandline interface
+$ ln -s `pwd`/bin/cimpler /usr/local/bin/
+$ node server.js >/var/log/cimpler.log &
+$ cimpler --help
+{% endhighlight %}
 
 ## What it does
 
-**Cimpler is mostly just a queue**
+**Cimpler is mostly just a queue with some plugins**
 with a few useful special-purpose constructs provided for its plugins to utilize.
 
 Cimpler relies entirely on plugins for:
@@ -40,34 +74,17 @@ Plugins interact with cimpler through a straightforward API:
 
   * `cimpler.addBuild()`
   * `cimpler.consumeBuild()`
-  * `registerMiddleware()` &mdash; register a connect HTTP middleware
+  * `cimpler.registerMiddleware()` &mdash; register a connect HTTP middleware
   * Events:
     * `buildAdded`
     * `buildStarted`
     * `buildFinished`
     * `shutdown`
 
-See the well documented [example config][config].
-
-## How iFixit Uses Cimpler
-
-The github plugin adds builds to the queue
-when it receives a [post-receive][hooks]
-notification from github.
-The git-build plugin takes builds off the queue,
-does some merging,
-and then runs a shell command that executes our test script.
-We also have the github-commit-status plugin report the build results to github
-so we get the positive **"Good to merge"** message and a link to the test log on each of our pull requests.
-
-### Like this :)
-<img class="screenshot" src="/assets/build-success.png"/>
-
-### Though sometimes like this :(
-<img class="screenshot" src="/assets/build-failed.png"/>
-
-
 ## Configuration
+
+See the well documented [example config][config] for a full explanation of each
+option.
 
 Configuration is done via a javascript file that exports a JS object.
 This is the entire configuration file we use at iFixit.

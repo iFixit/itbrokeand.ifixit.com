@@ -80,6 +80,18 @@ module.exports = {
    httpPort: 12345,
 
    plugins: {
+      'git-build': {
+         // 2 build dirs == 2 jobs can run in parallel
+         repoPaths: ['/home/ci-1/Code/',
+                     '/home/ci-2/Code/'],
+         cmd: 'Tests/continuous-integration.sh',
+         logs: {
+            path: '/var/www/pub/cimpler-logs/',
+            url:  'http://[REDACTED]/cimpler-logs/'
+         },
+         timeout: 20 * 60 * 1000 // 20 minutes
+      },
+
       'github-commit-status': {
          auth: {
             // Anything accepted github.authenticate()
@@ -103,19 +115,7 @@ module.exports = {
       /**
        * enable commandline plugin
        */
-      cli: true,
-
-      'git-build': {
-         // 2 build dirs == 2 jobs can run in parallel
-         repoPaths: ['/home/ci-1/Code/',
-                     '/home/ci-2/Code/'],
-         cmd: 'Tests/continuous-integration.sh',
-         logs: {
-            path: '/var/www/pub/cimpler-logs/',
-            url:  'http://[REDACTED]/cimpler-logs/'
-         },
-         timeout: 20 * 60 * 1000 // 20 minutes
-      }
+      cli: true
    }
 };
 {% endhighlight %}

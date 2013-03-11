@@ -1,13 +1,14 @@
 ---
-layout: default
-title: "Cimpler - A continuous integration server"
+layout: with-comments
+title: "Cimpler - continuous integration, unix style"
 author: Daniel Beardsley
 author_url: http://github.com/danielbeardsley
 summary: Cimpler is a continuous intergration server in node.js
-         that is simple to configure, install, and use.
+         that aims to do one this, and do it well, or at least simply.
 ---
 
-Cimpler: [Github Repo](https://github.com/danielbeardsley/cimpler)
+Because the world really needed another CI server, we made one.
+Checkout [cimpler on github][repo].
 
 At iFixit, we spent far too long
 trying to configure [Jenkins](http://jenkins-ci.org/)

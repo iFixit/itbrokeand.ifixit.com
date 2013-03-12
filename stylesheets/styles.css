@@ -9,11 +9,21 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color:#222;
-  margin:0 0 20px;
+  margin:0 0 15px;
 }
 
 p, ul, ol, table, pre, dl {
-  margin:0 0 20px;
+  margin:0 0 25px;
+}
+
+/* Make lists a little closer to their preceeding paragraphs */
+p + ul {
+  margin-top: -15px;
+}
+
+/* Nested lists shouldn't have huge margins */
+li > ul {
+   margin-bottom:0;
 }
 
 h1, h2, h3 {
@@ -252,4 +262,10 @@ footer {
     font-size:12pt;
     color:#444;
   }
+}
+
+.screenshot {
+   -moz-border-radius: 25px;
+        border-radius: 25px;
+   border: 2px solid #eee;
 }

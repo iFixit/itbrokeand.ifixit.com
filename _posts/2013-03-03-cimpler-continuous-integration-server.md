@@ -1,14 +1,14 @@
 ---
 layout: with-comments
-title: "Cimpler - continuous integration, unix style"
+title: "Cimpler - continuous integration, unix-style"
 author: Daniel Beardsley
 author_url: http://github.com/danielbeardsley
-summary: Cimpler is a continuous intergration server in node.js
-         that aims to do one this, and do it well, or at least simply.
+summary: Cimpler is a continuous intergration server built with node.js
+         that aims to do one thing, and do it well, or at least simply.
 ---
 
 Because the world really needed another CI server, we made one.
-Checkout [cimpler on github][repo] and feel free to contribute.
+Check out [cimpler on github][repo] and feel free to contribute.
 
 At [iFixit](http://www.ifixit.com), we spent far too long
 trying to configure [Jenkins](http://jenkins-ci.org/)
@@ -17,7 +17,7 @@ Jenkins and friends ended up being unintuitive (at least for our purposes)
 and had far more features than we needed.
 
 I love node.js and needed something simple, single-purpose, and extensible,
-you know, unix-style.
+&mdash; you know, unix-style.
 So, late one night, I wrote [cimpler][repo].
 We've been using it in production since <time datetime="2012-10-08">Oct. 2012</time>
 and it's been rock solid
@@ -29,9 +29,9 @@ and it's been rock solid
 when it receives a [post-receive][hooks]
 notification from github.
 2. The git-build plugin takes builds off the queue,
-does some merging,
+merges in `master`
 and then runs a shell command that executes our test suite.
-3. We also have the github-commit-status plugin report the build results to github
+3. The github-commit-status plugin reports the build results to github
 so we get the positive **"Good to merge"** message and a link to the test log on each of our pull requests.
 
 ### Like this :)
@@ -59,7 +59,7 @@ $ cimpler --help
 ## What it does
 
 **Cimpler is mostly just a queue with some plugins**
-with a few useful special-purpose constructs provided for its plugins to utilize.
+and a few useful special-purpose constructs provided for its plugins to utilize.
 
 Cimpler relies entirely on plugins for:
 
@@ -92,7 +92,7 @@ This is the entire configuration file we use at iFixit.
 {% highlight javascript %}
 module.exports = {
    /**
-    * All plugin can register connect middleware that
+    * All plugins can register connect.js middleware that
     * will listen on this port.
     */
    httpPort: 12345,
@@ -112,7 +112,7 @@ module.exports = {
 
       'github-commit-status': {
          auth: {
-            // Anything accepted github.authenticate()
+            // Anything accepted by github.authenticate()
             // https://github.com/ajaxorg/node-github
             type: 'basic',
             username: "[REDACTED]",

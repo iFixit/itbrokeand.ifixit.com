@@ -16,7 +16,7 @@ p, ul, ol, table, pre, dl {
   margin:0 0 25px;
 }
 
-/* Make litsts a little closer to their preceeding paragraphs */
+/* Make lists a little closer to their preceeding paragraphs */
 p + ul {
   margin-top: -15px;
 }

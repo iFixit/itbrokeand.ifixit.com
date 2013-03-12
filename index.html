@@ -4,19 +4,22 @@ layout: default
 
 {% for page in paginator.posts %}
   {% unless page.draft %}
-    <div class="date">
-      {{ page.date | date: "%Y-%m-%d" }}
+    <div class='short-post'>
+       <time datetime="{{ page.date | date: "%Y-%m-%d" }}">
+         {{ page.date | date: "%Y-%m-%d" }}
+       </time>
+       <h2>
+         <a href="{{ page.url }}">{{ page.title }}</a>
+       </h2>
+       <div class='summary'>
+          {% if page.summary %}
+             {{ page.summary | markdownify }}
+          {% else %}
+             {{ page.content | truncatewords: 130 }}
+          {% endif %}
+          <a class='more' href="{{ page.url }}">more</a>
+       </div>
     </div>
-    <h2>
-      <a href="{{ page.url }}">{{ page.title }}</a>
-    </h2>
-    {% if page.summary %}
-       {{ page.summary | markdownify }}
-    {% else %}
-       {{ page.content | truncatewords: 130 }}
-    {% endif %}
-    <a href="{{ page.url }}">more</a>
-    <br /><br />
   {% endunless %}
 {% endfor %}
 

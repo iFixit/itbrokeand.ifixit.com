@@ -269,3 +269,14 @@ footer {
         border-radius: 25px;
    border: 2px solid #eee;
 }
+
+/* Spacing between posts on index page. */
+.short-post > .summary {
+   margin-bottom:2em;
+}
+
+/* reduce spacing between summary and 'more' link */
+.summary > p {
+   margin-bottom:0.2em;
+}
+

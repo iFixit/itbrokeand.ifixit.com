@@ -2,7 +2,9 @@
   <a href="{{ page.url }}">{{ page.title }}</a>
 </h1>
 <div class="date">
-  {{ page.date | date: "%Y-%m-%d" }}
+  <time datetime="{{ page.date | date: "%Y-%m-%d" }}">
+    {{ page.date | date: "%Y-%m-%d" }}
+  </time>
   {% if page.author %}
     <small>- 
       {% if page.author_url %}

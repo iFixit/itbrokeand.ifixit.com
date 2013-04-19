@@ -59,7 +59,7 @@ This would produce something along the lines of:
             )
         [1] => Array
             (
-                [output] => machine1.example.com
+                [output] => machine2.example.com
                 [exitCode] => 0
             )
     )

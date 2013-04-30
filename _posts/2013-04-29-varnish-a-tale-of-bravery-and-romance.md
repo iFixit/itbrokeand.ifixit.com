@@ -92,7 +92,7 @@ It was time for Plan B.
 # A Plan Composed of Duct Tape
 
 Thankfully, our project manager had, with a well-tuned sense of caution,
-insisted I make some sort of backup plan.  This was an single app machine, set
+insisted I make some sort of backup plan.  This was a single app machine, set
 aside from standard rotation, with Apache turned off and Nginx configured to
 serve static files.  I gave up on memcached for the time being and focused on
 keeping the site available, through whatever means necessary.

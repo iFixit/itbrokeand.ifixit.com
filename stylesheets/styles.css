@@ -1,11 +1,12 @@
 body {
   padding:50px;
-  font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font:14px/1.8 "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#444;
   font-weight:300;
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#222;
   margin:0 0 15px;
 }

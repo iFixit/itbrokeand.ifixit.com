@@ -122,7 +122,7 @@ language growing features over time, Varnish uses a powerful C-like syntax
 called VCL.  In VCL, this operation was as simple as putting something like
 this in our `vcl_recv` function:
 
-{% highlight javascript %}
+{% highlight perl %}
 if (req.url ~ "^/Teardown/iPhone+5+Teardown/10525/") {
     unset(req.http.Cookie);
     return (lookup);
@@ -137,7 +137,7 @@ caches on the rest of our site.  While the "correct" way to do this is through
 the backend, Varnish again made it easy for us to make a quick change to the
 same effect:
 
-{% highlight javascript %}
+{% highlight perl %}
 sub vcl_fetch {
     if (req.http.host ~ "^(www\.)?ifixit\.com$") {
         if (req.url ~ "^/Teardown/iPhone+5+Teardown/10525/") {

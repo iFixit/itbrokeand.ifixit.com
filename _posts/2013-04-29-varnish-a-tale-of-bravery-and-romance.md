@@ -122,10 +122,12 @@ language growing features over time, Varnish uses a powerful C-like syntax
 called VCL.  In VCL, this operation was as simple as putting something like
 this in our `vcl_recv` function:
 
-    if (req.url ~ "^/Teardown/iPhone+5+Teardown/10525/") {
-        unset(req.http.Cookie);
-        return (lookup);
-    }
+{% highlight perl %}
+if (req.url ~ "^/Teardown/iPhone+5+Teardown/10525/") {
+    unset(req.http.Cookie);
+    return (lookup);
+}
+{% endhighlight %}
 
 This strips off any cookies the client is sending and forces a cache-lookup on
 the (now-simplified) request object.
@@ -135,17 +137,19 @@ caches on the rest of our site.  While the "correct" way to do this is through
 the backend, Varnish again made it easy for us to make a quick change to the
 same effect:
 
-    sub vcl_fetch {
-        if (req.http.host ~ "^(www\.)?ifixit\.com$") {
-            if (req.url ~ "^/Teardown/iPhone+5+Teardown/10525/") {
-                set beresp.ttl = 15m;
-                return (deliver);
-            } else {
-                set beresp.ttl = 1m;
-            }
+{% highlight perl %}
+sub vcl_fetch {
+    if (req.http.host ~ "^(www\.)?ifixit\.com$") {
+        if (req.url ~ "^/Teardown/iPhone+5+Teardown/10525/") {
+            set beresp.ttl = 15m;
+            return (deliver);
+        } else {
+            set beresp.ttl = 1m;
         }
-        # More rules about cookies, 404s, etc.
     }
+    # More rules about cookies, 404s, etc.
+}
+{% endhighlight %}
 
 And with that, we were set - operating a solution that'd make [Travis Taylor]
 proud.

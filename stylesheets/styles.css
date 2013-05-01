@@ -1,13 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
-
 body {
   padding:50px;
-  font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font:14px/1.8 "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#444;
   font-weight:300;
 }
 
+.post p {
+   font-size: 18px;
+}
+
 h1, h2, h3, h4, h5, h6 {
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#222;
   margin:0 0 15px;
 }
@@ -67,10 +70,11 @@ blockquote {
   font-style:italic;
 }
 
-code, pre {
+code, pre, .gist{
   font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   color:#333;
   font-size:12px;
+  line-height:1.4em;
 }
 
 pre {

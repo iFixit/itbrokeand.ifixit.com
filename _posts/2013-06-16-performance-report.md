@@ -42,7 +42,7 @@ the 50ms increase of response times over the overall.
 Thankfully, search requests somewhat make up for Answers, running almost
 30-50ms faster than the average.  This is thanks in part to having a much
 higher percentage of AJAX calls versus full page renders, as well as the
-replacement of Sphinx for MySQL as the primary datasource.
+replacement of Sphinx for MySQL as the primary data source.
 
 Here are the averages calculated from Graphite across the whole day, using
 Graphite's CSV output, a little unix shell magic, and [the average project]:
@@ -54,7 +54,7 @@ Graphite's CSV output, a little unix shell magic, and [the average project]:
 | Answers | 233.92 | 243.19 | 102.22         | 79.15 |  6466.81
 | Search  | 134.64 | 184.20 | 257.93         | 38.02 | 10752.06
 
-This statistics are recorded inside our application, so let's grab a view from
+These statistics are recorded inside our application, so let's grab a view from
 outside:
 
 ![varnishhist](/assets/2013-06-16-performance-report/varnishhist.png)
@@ -111,8 +111,8 @@ users' requests to upload, crop, and mark-up images.
 | Generate Sizes |   2.92 | 2.23 | 1.21           | 0.25 |   5.89
 
 While the new system [Cedric] just put into place improved our markup rendering
-by an order of magnitude, it still seems high, both in the the max of almost
-two minutes and the more reasonable median + deviation of seventeen seconds.
+by an order of magnitude, it still seems high, both in the max of almost two
+minutes and the more reasonable median + deviation of seventeen seconds.
 
 --------------------------------------------------------------------------------
 

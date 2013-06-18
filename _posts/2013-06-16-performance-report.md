@@ -22,14 +22,6 @@ graphs of response times from last Friday, 2013-06-14.
 
 Our overall response times stay at the 150ms mark.  Not bad.
 
-![admin](/assets/2013-06-16-performance-report/admin.png)
-
-The internal operations tools for handling stocking, shipping, and customer
-service are used by far fewer people throughout the day than any other part of
-our site; thus, the range of response times is much wider.  While our most
-common operations are quite fast, less-used areas have suffered from neglect,
-with their response times off this chart.
-
 ![answers](/assets/2013-06-16-performance-report/answers.png)
 
 One of the main sections of the site is our Q&A product, [Answers].  Despite
@@ -50,7 +42,6 @@ Graphite's CSV output, a little unix shell magic, and [the average project]:
 | Section | Median | Mean   | Std Deviation  | Min   | Max
 |---------|--------|--------|----------------|-----------------
 | Overall | 205.12 | 230.02 | 152.29         | 93.29 |  5683.25
-| Admin   |  70.55 | 260.87 | 712.07         | 18.14 | 15437.67
 | Answers | 233.92 | 243.19 | 102.22         | 79.15 |  6466.81
 | Search  | 134.64 | 184.20 | 257.93         | 38.02 | 10752.06
 

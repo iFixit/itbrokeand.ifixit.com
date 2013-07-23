@@ -1,6 +1,6 @@
 ---
 layout: with-comments
-title: "CSRF - How we protect ifixit from request forgery"
+title: "CSRF - How we protect ifixit.com from request forgery"
 author: Daniel Beardsley
 author_url: http://github.com/danielbeardsley
 summary: We've come up with a minimalist method of protecting our site
@@ -12,7 +12,7 @@ protecting our site from cross site request forgery ([CSRF][csrf])
 and we'd like to share how we do it.
 
 ## What do we do?
-We use a small amout of javascript
+We use a small amount of javascript
 to automatically set a cookie and add a form field
 immedaitely before a form is submitted.
 This frees us from the hassle of ensuring *every* form 
@@ -22,12 +22,12 @@ includes a hidden csrf `<input>` in *every* template.
 Cross-site request forgery allows an attacker
 to make arbitrary requests to a target site
 on behaf of another user,
-with their privleges but without their consent.
+*with* their privleges but *without* their consent.
 
 ## How is a CSRF attack executed?
 An attacker first figures out what is sent during a
 a particular POST request on the target site
-(maybe something imoprtant like deleting a Guide).
+(maybe something important like deleting a Guide).
 Next, they create a similar form (via html or javascript) on their own site.
 When a user who is logged in on the target site visits the attackers site,
 it submits the form to the target site

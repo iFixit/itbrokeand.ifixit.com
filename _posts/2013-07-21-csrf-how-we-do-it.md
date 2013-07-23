@@ -45,6 +45,127 @@ Upon submission, the server
 compares the cookie with the value from the form.
 
 ### Problems with the standard approach
+The standard approach requires
+adding a `<input>` tag to each `<form>` in every template.
+That's a lot of repeated code,
+even if you boil it down to a function call
+or a single partial template;
+there are likely hundreds of forms across your application.
+At the very least, that's just more boiler-plate code
+that slows development progress.
+At the worst, you may forget to add the CSRF `<input>` tag
+to some seldom-used forms and they'll efectively be broken.
+
+### Our approach to prevention
+We use javascript to dynamically set a cookie
+and add an `<input>` element to the form
+immediately before it's submitted.
+Because we just have to prove that we can alter or read cookies
+we don't need to depend on the server-side for setting the cookie,
+the client can do it just fine.
+We hook into forms in two ways, by replacing the `form.submit()` function
+and listening for the `onsubmit` event.
+Doing it in this way frees us from worrying about CSRF inputs and tokens.
+It reduces the boiler-plate code for creating new pages and forms
+and reduces the chance of mistakes.
+
+Here's the entire javascript implementation of our CSRF protection [gist][gist]:
+{% highlight javascript %}
+var CSRF = (function() {
+   window.addEvent('domready', function() {
+      /**
+       * Setup triggers on the .submit() function and the `submit` event so we
+       * can add csrf inputs immediately before the form is submitted.
+       */
+      $$('form').each(function(form) {
+         // Ensure all forms submitted via a traditional 'submit' button have
+         // an up-to-date CSRF input
+         form.addEvent('submit', function() {
+            ensureFormHasCSRFFormField(form);
+         });
+         // Ensure all forms submitted via form.submit() have an up-to-date CSRF
+         // input
+         var oldSubmit = form.submit;
+         // Wrap the default submit() function with our own
+         form.submit = function () {
+            ensureFormHasCSRFFormField(form);
+            return oldSubmit.call(form, Array.from(arguments));
+         }
+      });
+   });
+
+   /**
+    * Generate a new token and store it in the cookie
+    */
+   function resetToken() {
+      /**
+       * random() generates a number [0..1] so the first two chars are always
+       *'0.' no matter what the base.
+       */
+      var token = Math.random().toString(36).substring(2,12); // 10 char string
+
+      // 30 days is pretty arbitrary, it could be 3 minutes or 3 years.
+      Cookie.write('csrf', token, { duration: 30 }); // 30 days
+      return token;
+   }
+
+   /**
+    * Ensure the provided Form element has a CSRF token
+    * input who's value is up to date.
+    */
+   function ensureFormHasCSRFFormField(form) {
+      csrfInputForForm(form).set('value', CSRF.get());
+   }
+
+   /**
+    * Return the csrf input element for the given form or give it one.
+    */
+   function csrfInputForForm(form) {
+      var csrfInput = form.getElement('.csrf');
+      if (!csrfInput) {
+         csrfInput = CSRF.formField();
+         form.grab(csrfInput);
+      }
+
+      return csrfInput;
+   }
+
+   return {
+      /**
+       * ## CSRF.get()
+       *
+       * Read the value from the cookie or create and return one
+       * if it doesn't exist
+       */
+      get: function() {
+         return Cookie.read('csrf') || resetToken();
+      },
+
+      /**
+       * Returns a new hidden input field with the CSRF token as a value.
+       * Used when dynamically creating forms.
+       */
+      formField: function() {
+         return new Element("input", {
+            type: 'hidden',
+            name: 'csrf',
+            'class': 'csrf',
+            value: CSRF.get()
+         });
+      }
+   };
+})();
+{% endhighlight %}
+
+Note: we use Mootools, but refactoring for no jQuery or no library would be
+fairly straightforward.
+
+We designed this, tested it extensively, then soft-deployed it, silently
+reporting CSRF failures to a database. Once we were confident that we'd covered
+all our bases we flipped the switch on enforcement and it's been working well
+since.
+
 
 [csrf]:          http://en.wikipedia.org/wiki/CSRF
+[gist]:          https://gist.github.com/danielbeardsley/6060418
 

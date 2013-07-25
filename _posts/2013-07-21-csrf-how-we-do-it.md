@@ -23,7 +23,7 @@ includes a hidden csrf `<input>` in *every* template.
 ## What does a CSRF attack allow?
 Cross-site request forgery allows an attacker
 to make arbitrary requests to a target site
-on behaf of another user,
+on behalf of another user,
 *with* their privleges but *without* their consent.
 
 ## How is a CSRF attack executed?
@@ -32,8 +32,8 @@ a particular POST request on the target site
 (maybe something important like deleting a Guide).
 Next, they create a similar form (via html or javascript) on their own site.
 When a user who is logged in on the target site visits the attackers site,
-it submits the form to the target site
-and performs the action on behaf of the hapless user.
+the form is submitted to the target site
+and performs the action on behalf of the hapless user.
 
 ## How can it be prevented?
 The root of CSRF prevention
@@ -63,8 +63,8 @@ to some seldom-used forms and they'll efectively be broken.
 We use javascript to dynamically set a cookie
 and add an `<input>` element to the form
 immediately before it's submitted.
-Because we just have to prove that we can alter or read cookies
-we don't need to depend on the server-side for setting the cookie,
+Because we just have to prove that we can alter or read cookies,
+we don't need to depend on the server-side for setting the cookie;
 the client can do it just fine.
 We hook into forms by replacing the `form.submit()` function
 and listening for the `onsubmit` event.
@@ -79,10 +79,12 @@ Here's the entire javascript implementation of our CSRF protection (Github [gist
 fairly straightforward.*
 
 ## How we deployed this
-We designed it, tested it extensively, ran our test suite many times, then
-soft-deployed it, silently reporting CSRF failures to a database. Once we'd
-worked out a few issues and were confident that we'd covered all our bases we
-flipped the switch on enforcement and it's been working well since.
+We designed it, tested it extensively, ran our test suite many times,
+then soft-deployed it, silently reporting CSRF failures to a database.
+Once we'd worked out a few issues
+and were confident that we'd covered all our bases,
+we flipped the switch on enforcement
+and it's been working well since.
 
 [csrf]:          http://en.wikipedia.org/wiki/CSRF
 [gist]:          https://gist.github.com/danielbeardsley/6060418

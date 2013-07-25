@@ -8,7 +8,7 @@ summary: We've come up with a minimalist method of protecting our site
 ---
 
 We've come up with a minimalist method of
-protecting our site from cross site request forgery ([CSRF][csrf])
+protecting our site from cross site request forgery ([CSRF][csrf]),
 and we'd like to share how we do it.
 
 ## What do we do?
@@ -24,7 +24,7 @@ includes a hidden csrf `<input>` in *every* template.
 Cross-site request forgery allows an attacker
 to make arbitrary requests to a target site
 on behalf of another user,
-*with* their privleges but *without* their consent.
+*with* their privileges but *without* their consent.
 
 ## How is a CSRF attack executed?
 An attacker first figures out what is sent during a
@@ -57,7 +57,7 @@ there are likely hundreds of forms across your application.
 At the very least, that's just more boiler-plate code
 that slows development progress.
 At the worst, you may forget to add the CSRF `<input>` tag
-to some seldom-used forms and they'll efectively be broken.
+to some seldom-used forms and they'll effectively be broken.
 
 ### Our approach to prevention
 We use javascript to dynamically set a cookie
@@ -75,12 +75,12 @@ and reduces the chance of mistakes.
 Here's the entire javascript implementation of our CSRF protection (Github [gist][gist]):
 {% gist 6060418 %}
 
-*Note: we use Mootools, but refactoring for no jQuery or no library would be
+*Note: we use Mootools &mdash; refactoring for no jQuery or no library would be
 fairly straightforward.*
 
 ## How we deployed this
 We designed it, tested it extensively, ran our test suite many times,
-then soft-deployed it, silently reporting CSRF failures to a database.
+then soft-deployed it &mdash; silently reporting CSRF failures to a database.
 Once we'd worked out a few issues
 and were confident that we'd covered all our bases,
 we flipped the switch on enforcement

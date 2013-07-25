@@ -15,6 +15,8 @@ and we'd like to share how we do it.
 We use a small amount of javascript
 to automatically set a cookie and add a form field
 immediately before a form is submitted.
+The server then compares the form field with the cookie
+and ignores the request if they don't match.
 This frees us from the hassle of ensuring *every* form 
 includes a hidden csrf `<input>` in *every* template.
 
@@ -42,7 +44,8 @@ to prove that they can read or write cookies on the allowed domain.
 Often, this is done by having the server set a cookie to a random value
 and include a hidden `<input>` in each `<form>` with the same value.
 Upon submission, the server
-compares the cookie with the value from the form.
+compares the cookie with the value from the form
+and ignores the request if they don't match.
 
 ### Problems with the standard approach
 The standard approach requires

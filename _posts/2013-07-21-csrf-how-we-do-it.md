@@ -89,7 +89,7 @@ var CSRF = (function() {
          // Wrap the default submit() function with our own
          form.submit = function () {
             ensureFormHasCSRFFormField(form);
-            return oldSubmit.call(form, Array.from(arguments));
+            return oldSubmit.apply(form, Array.from(arguments));
          }
       });
    });

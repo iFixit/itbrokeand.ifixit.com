@@ -40,13 +40,13 @@ The easiest way to enforce this is to require the request submitter
 to prove that they can read or write cookies on the allowed domain.
 
 Often, this is done by having the server set a cookie to a random value
-and include a hidden `<input>` tag in each `<form>` with the same value.
+and include a hidden `<input>` in each `<form>` with the same value.
 Upon submission, the server
 compares the cookie with the value from the form.
 
 ### Problems with the standard approach
 The standard approach requires
-adding a `<input>` tag to each `<form>` in every template.
+adding an `<input>` tag to each `<form>` in every template.
 That's a lot of repeated code,
 even if you boil it down to a function call
 or a single partial template;

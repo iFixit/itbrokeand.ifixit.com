@@ -14,7 +14,7 @@ and we'd like to share how we do it.
 ## What do we do?
 We use a small amount of javascript
 to automatically set a cookie and add a form field
-immedaitely before a form is submitted.
+immediately before a form is submitted.
 This frees us from the hassle of ensuring *every* form 
 includes a hidden csrf `<input>` in *every* template.
 
@@ -63,9 +63,9 @@ immediately before it's submitted.
 Because we just have to prove that we can alter or read cookies
 we don't need to depend on the server-side for setting the cookie,
 the client can do it just fine.
-We hook into forms in two ways, by replacing the `form.submit()` function
+We hook into forms by replacing the `form.submit()` function
 and listening for the `onsubmit` event.
-Doing it in this way frees us from worrying about CSRF inputs and tokens.
+This frees us from worrying about CSRF inputs and tokens in our templates.
 It reduces the boiler-plate code for creating new pages and forms
 and reduces the chance of mistakes.
 

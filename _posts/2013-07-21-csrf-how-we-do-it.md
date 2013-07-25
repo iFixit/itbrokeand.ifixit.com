@@ -157,14 +157,14 @@ var CSRF = (function() {
 })();
 {% endhighlight %}
 
-Note: we use Mootools, but refactoring for no jQuery or no library would be
-fairly straightforward.
+*Note: we use Mootools, but refactoring for no jQuery or no library would be
+fairly straightforward.*
 
-We designed this, tested it extensively, then soft-deployed it, silently
-reporting CSRF failures to a database. Once we were confident that we'd covered
-all our bases we flipped the switch on enforcement and it's been working well
-since.
-
+## How we deployed this
+We designed it, tested it extensively, ran our test suite many times, then
+soft-deployed it, silently reporting CSRF failures to a database. Once we'd
+worked out a few issues and were confident that we'd covered all our bases we
+flipped the switch on enforcement and it's been working well since.
 
 [csrf]:          http://en.wikipedia.org/wiki/CSRF
 [gist]:          https://gist.github.com/danielbeardsley/6060418

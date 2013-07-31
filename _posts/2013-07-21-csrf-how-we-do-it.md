@@ -71,6 +71,9 @@ and listening for the `onsubmit` event.
 This frees us from worrying about CSRF inputs and tokens in our templates.
 It reduces the boiler-plate code for creating new pages and forms
 and reduces the chance of mistakes.
+One caveat: If forms are created dynamically in javascript,
+an input element must be added while creating the form.
+Luckily, this is trivial: `form.grab(CSRF.formField())`.
 
 Here's the entire javascript implementation of our CSRF protection (Github [gist][gist]):
 {% gist 6060418 %}
@@ -83,8 +86,8 @@ We designed it, tested it extensively, ran our test suite many times,
 then soft-deployed it &mdash; silently reporting CSRF failures to a database.
 Once we'd worked out a few issues
 and were confident that we'd covered all our bases,
-we flipped the switch on enforcement
-and it's been working well since.
+we flipped the enforcement switch on
+and it's been working well ever since.
 
 [csrf]:          http://en.wikipedia.org/wiki/CSRF
 [gist]:          https://gist.github.com/danielbeardsley/6060418

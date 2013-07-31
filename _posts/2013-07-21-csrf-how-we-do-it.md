@@ -8,8 +8,8 @@ summary: We've come up with a minimalist method of protecting our site
 ---
 
 We've come up with a minimalist method of
-protecting our site from cross site request forgery ([CSRF][csrf]),
-and we'd like to share how we do it.
+protecting our site from cross site request forgery ([CSRF][csrf]).
+Here's how we do it.
 
 ## What do we do?
 We use a small amount of javascript

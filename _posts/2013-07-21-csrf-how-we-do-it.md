@@ -51,17 +51,17 @@ and ignores the request if they don't match.
 The standard approach requires
 adding an `<input>` tag to each `<form>` in every template.
 That's a lot of repeated code,
-even if you boil it down to a function call
+even if it's boiled down to a function call
 or a single partial template;
-there are likely hundreds of forms across your application.
+there are often hundreds of forms in a typical web-app.
 At the very least, that's just more boiler-plate code
 that slows development progress.
-At the worst, you may forget to add the CSRF `<input>` tag
+At the worst, it's easy to forget to add the CSRF `<input>` tag
 to some seldom-used forms and they'll effectively be broken.
 
 ### Our approach to prevention
 We use javascript to dynamically set a cookie
-and add an `<input>` element to the form
+and add an `<input>` element to each form
 immediately before it's submitted.
 Because we just have to prove that we can alter or read cookies,
 we don't need to depend on the server-side for setting the cookie;

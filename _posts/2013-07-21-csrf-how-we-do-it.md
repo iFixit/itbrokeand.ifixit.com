@@ -78,7 +78,7 @@ Luckily, this is trivial: `form.grab(CSRF.formField())`.
 Here's the entire javascript implementation of our CSRF protection (Github [gist][gist]):
 {% gist 6060418 %}
 
-*Note: we use Mootools &mdash; refactoring for no jQuery or no library would be
+*Note: we use Mootools &mdash; refactoring for jQuery or no library would be
 fairly straightforward.*
 
 ## How we deployed this

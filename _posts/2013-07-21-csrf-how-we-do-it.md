@@ -31,7 +31,7 @@ An attacker first figures out what is sent during a
 a particular POST request on the target site
 (maybe something important like deleting a Guide).
 Next, they create a similar form (via html or javascript) on their own site.
-When a user who is logged in on the target site visits the attackers site,
+When a user who is logged in on the target site visits the attacker's site,
 the form is submitted to the target site
 and performs the action on behalf of the hapless user.
 

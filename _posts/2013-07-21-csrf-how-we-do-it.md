@@ -28,7 +28,7 @@ on behalf of another user,
 
 ## How is a CSRF attack executed?
 An attacker first figures out what is sent during a
-a particular POST request on the target site
+particular POST request on the target site
 (maybe something important like deleting a Guide).
 Next, they create a similar form (via html or javascript) on their own site.
 When a user who is logged in on the target site visits the attacker's site,

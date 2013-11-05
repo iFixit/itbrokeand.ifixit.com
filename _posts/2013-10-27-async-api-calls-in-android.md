@@ -9,7 +9,7 @@ summary: This is how we achieved reliable delivery of asynchronous API call
 ---
 
 iFixit's [Android app], like most mobile apps, is driven by content downloaded asynchronously from web APIs.
-Because we currently have over 3 dozen API calls littered throughout the codebase, an easy-to-use and reliable method of performing API calls is crucial.
+Because we currently have over 3 dozen API calls spread throughout the codebase, an easy-to-use and reliable method of performing API calls is crucial.
 
 Over the past few years we have made many iterations of our API call interface.
 Each iteration solved problems present in the previous one and potentially introduced new problems.
@@ -22,12 +22,12 @@ This system works remarkably well in terms of reliability and developer friendli
 
 # The Problem
 
-However, there are 2 flaws present in this system which were made painfully obvious when developing [guide edit].
+However, there are 2 flaws present in this system which were made painfully obvious when developing the [guide edit interface].
 When editing a step in `StepEditActivity`, users can attach an image taken from the camera.
-The image is uploaded in `StepEditActivity` which blocks step save until all pending image uploads are complete.
+The image is uploaded in `StepEditActivity` which blocks the user from saving the step until all pending image uploads are complete.
 Because multiple images can be uploaded to a single step, the user commonly bounces between the camera and `StepEditActivity`.
-`StepEditActivity` doesn't receive image upload results when the user is taking a picture with the camera because Activities are unregistered from Otto in `onPause` to avoid a crashes during UI updates.
-This caused step save to hang indefinitely because `StepEditActivity` missed its one and only opportunity to receive the event.
+`StepEditActivity` doesn't receive image upload results when the user is taking a picture with the camera because Activities are unregistered from Otto in `onPause` to avoid a crash during UI updates.
+This caused step save to block indefinitely because `StepEditActivity` missed its one and only opportunity to receive the event.
 It is stuck waiting for an API call that has already completed and refuses to allow the user to save changes to the step.
 Needless to say, this was unacceptable.
 
@@ -127,7 +127,7 @@ The [full changeset] weighs in at 180 additions and 84 deletions; a decent porti
 Our app is, of course, [open source] so feel free to fork it and hack away!
 
 [Android app]: https://play.google.com/store/apps/details?id=com.dozuki.ifixit
-[guide edit]: http://ifixit.org/5280/whole-new-android-experience-on-ifixit/
+[guide edit interface]: http://ifixit.org/5280/whole-new-android-experience-on-ifixit/
 [full changeset]: https://github.com/iFixit/iFixitAndroid/compare/2219cb8...983be9b
 [open source]: https://github.com/iFixit/iFixitAndroid
 [Otto]: http://square.github.io/otto/

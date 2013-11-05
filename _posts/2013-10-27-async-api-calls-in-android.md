@@ -5,36 +5,35 @@ author: Marc Zych
 author_url: https://github.com/marczych
 summary: This is how we achieved reliable delivery of asynchronous API call
          results in Android while maintaining loose coupling of components
-         using the Otto event bus.
+         with the Otto event bus.
 ---
 
-iFixit's [Android app], like most mobile applications, is driven by content downloaded asynchronously from web APIs.
-Since we currently have over 3 dozen API calls littered throughout the codebase, an easy-to-use and reliable method of performing API calls is crucial.
+iFixit's [Android app], like most mobile apps, is driven by content downloaded asynchronously from web APIs.
+Because we currently have over 3 dozen API calls littered throughout the codebase, an easy-to-use and reliable method of performing API calls is crucial.
 
-Over the past few years we have made many iterations of our API call interface; each one better than the last.
-In chronological order: raw HTTP requests in Activities, abstracted HTTP requests with asynchronous callbacks, and finally a service performing requests and returning results through BroadcastReceivers.
-Our current implementation replaces BroadcastReceivers with [Otto] because its interface is much cleaner.
+Over the past few years we have made many iterations of our API call interface.
+Each iteration solved problems present in the previous one and potentially introduced new problems.
+A rough progression: raw HTTP requests in Activities, abstracted HTTP requests with asynchronous callbacks, a service performing requests and returning results through BroadcastReceivers, and finally replacing BroadcastReceivers with [Otto].
 
 Otto, and even BroadcastReceivers, mitigated the problem of leaking Activities and updating the UI after the Activity has been destroyed.
-By registering for events in `onResume()` and unregistering in `onPause()`, the Activity only receives API call results if it is able to update the UI.
+By registering for events in `onResume()` and unregistering in `onPause()`, the Activity only receives API call results if it is in the foreground.
 This gracefully handles orientation changes because the new Activity will receive results of API calls initiated by the previous Activity.
 This system works remarkably well in terms of reliability and developer friendliness.
 
 # The Problem
 
-However, there are 2 major flaws present in this system which were made painfully obvious when developing [guide edit].
-When editing a step in `StepEditActivity`, users can add images taken from their camera.
-The user's image is uploaded in `StepEditActivity` which blocks step save until all pending image uploads are complete.
-Since multiple images can be uploaded to a single step, the user commonly bounces between the camera and `StepEditActivity`.
-Since Activities are unregistered from Otto in `onPause`, `StepEditActivity` doesn't receive image upload results when the user is taking a picture with the camera.
-This is good because the app would crash if the event was received since it would try to update the UI.
-This is bad because that was the one and only time to receive the event which was dropped on the floor because nobody was listening for it.
-This caused step save to hang indefinitely because `StepEditActivity` didn't receive the image upload response and still thinks that there is a pending image upload.
+However, there are 2 flaws present in this system which were made painfully obvious when developing [guide edit].
+When editing a step in `StepEditActivity`, users can attach an image taken from the camera.
+The image is uploaded in `StepEditActivity` which blocks step save until all pending image uploads are complete.
+Because multiple images can be uploaded to a single step, the user commonly bounces between the camera and `StepEditActivity`.
+`StepEditActivity` doesn't receive image upload results when the user is taking a picture with the camera because Activities are unregistered from Otto in `onPause` to avoid a crashes during UI updates.
+This caused step save to hang indefinitely because `StepEditActivity` missed its one and only opportunity to receive the event.
+It is stuck waiting for an API call that has already completed and refuses to allow the user to save changes to the step.
 Needless to say, this was unacceptable.
 
-The other issue was fairly minor.
+The other issue is fairly minor.
 Many of our Otto `@Subscribe` methods have the same arguments and thus will receive the same events.
-For example, `TeardownsActivity` and `FeaturedGuidesActivity` both listen for events of type `APIResult<Guide>` since they both display a list of guides, albeit from different sources.
+For example, `TeardownsActivity` and `FeaturedGuidesActivity` both listen for events of type `APIResult<Guide>` because they both display a list of guides, albeit from different sources.
 This opens up the possibility of receiving results of API calls initiated by other Activities.
 
 Both of these issues are concisely demonstrated in the following example:
@@ -53,7 +52,7 @@ I realized 2 things when thinking about this problem:
 
 1. API calls, and subsequently their results, need to be tied to the Activity that initiated it.
    This includes Activity instances created during orientation changes which the user considers to be the same screen.
-   I'm going to call this an "activity session."
+   I'm going to call this an _activity session_.
 1. Unhandled API results should be saved and retried when its initiating Activity resumes.
 
 Fortunately, implementing both of these is simple, straightforward, and doesn't involve modifying each and every API call site.
@@ -92,12 +91,12 @@ public abstract class BaseActivity extends
 }
 {% endhighlight %}
 
-Now we can use the `activityid` to tie API results to an activity session.
+Now we can use `mActivityid` to tie API results to an activity session.
 In addition to the endpoint, URL, auth token, etc., the `activityid` that initiated the request is stored in the `APICall` which is accessible to API result receivers.
-Requiring each `@Subscribe` API result method to check the `activityid` before proceeding is too cumbersome with as many API calls that we have.
+Requiring each `@Subscribe` API result method to compare the `activityids` before proceeding is too cumbersome with as many API calls that we have.
 `BaseActivity` is the best place to perform such validation but receiving the event is tricky.
 The usual `APIResult<?>` object can't be posted because the derived Activity will receive it as well.
-We can instead wrap the `APIResult<?>` in a proxy class that only `BaseActivity` will listen for so it can check the `activityid`:
+We instead wrap the `APIResult<?>` in a class that only `BaseActivity` will listen for so it can proxy to the actual event handler if the `activityids` match.
 
 {% highlight java %}
 @Subscribe
@@ -114,13 +113,13 @@ public void onApiCall(APIEvent.ActivityProxy activityProxy) {
 }
 {% endhighlight %}
 
-If the `activityid` matches, the actual `APIResult<?>` is posted to the bus so the Activity can receive it like normal.
+If the `activityids` match, the actual `APIResult<?>` is posted to the bus so the Activity can receive it like normal.
 If it doesn't match, then it is as if the event wasn't handled at all.
-For Otto, this results in a `DeadEvent` that wraps the object that wasn't handled.
+For Otto, this results in a `DeadEvent` that wraps the Object that wasn't handled.
 `APIService` listens for `DeadEvent`s and hangs on to ones containing an `APIResult<?>` or `APIResult.ActivityProxy`.
-When an Activity registers to Otto, dead events with the same `activityid` are posted to the bus so the Activity can receive the results.
+When an Activity registers to the bus, `APIService` posts all `DeadEvent`s with the same `activityid` the bus so the Activity can receive the results.
 
-This approach gives us reliable delivery of API results while maintaining loose coupling of Activities by using Otto.
+This approach gives us reliable delivery of API results while maintaining loose coupling of Activities with Otto.
 In particular, when resumed, Activities receive API call results that completed when the Activity was paused.
 Additionally, Activities only receive results for API calls that they initiated.
 

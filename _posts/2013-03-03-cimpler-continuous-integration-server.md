@@ -3,7 +3,7 @@ layout: with-comments
 title: "Cimpler - continuous integration, unix-style"
 author: Daniel Beardsley
 author_url: http://github.com/danielbeardsley
-summary: Cimpler is a continuous intergration server built with node.js
+summary: Cimpler is a continuous integration server built with node.js
          that aims to do one thing, and do it well, or at least simply.
 ---
 

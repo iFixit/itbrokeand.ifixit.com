@@ -18,24 +18,32 @@ mean,min,max,std-dev of the execution time for each and every place in our code
 base where we make a database query. Note: units are in milliseconds and these
 stats wer collected over a 24hour period.
 
-    // avg:1.328 count:111 sum:147.361 std:3.753 min:0.465 max:35.607 - callsite(2013-11-25):
-    $db->execute($q_insert, array(T_S, $text, T_S, $tagtype));
+{% highlight php startinline %}
+// avg:1.328 count:111 sum:147.361 std:3.753 min:0.465 max:35.607 - callsite(2013-11-25):
+$db->execute($q_insert, array(T_S, $text, T_S, $tagtype));
+{% endhighlight %}
 
 Hit ratios for all of our cache gets: (diff is the number of misses)
 
-    // diff:476696 1508814 / 1985510 = 75.99% - callsite(2013-11-25):
-    if (($reputation = $cache->get($key)) === false) {
+{% highlight php startinline %}
+// diff:476696 1508814 / 1985510 = 75.99% - callsite(2013-11-25):
+if (($reputation = $cache->get($key)) === false) {
+{% endhighlight %}
 
-Cache replacement times for each set() (i.e. time between a get
-with a cache miss and the following set() of the same key.
+Cache replacement times for each `set()` (i.e. time between a get
+with a cache miss and the following `set()` of the same key.
 
-    // avg:69.28 count:158 sum:10947.06 std:12.56 min:51.95 max:149.79 - callsite(2013-11-25):
-    $cache->set($key, $device, CACHE_SHORT);
+{% highlight php startinline %}
+// avg:69.28 count:158 sum:10947.06 std:12.56 min:51.95 max:149.79 - callsite(2013-11-25):
+$cache->set($key, $device, CACHE_SHORT);
+{% endhighlight %}
 
-And lastly, we get query times for each usage of ::find() through our ORM.
+And lastly, we get query times for each usage of `::find()` through our ORM.
 
-    // avg:0.921 count:8457 sum:7792.918 std:2.332 min:0 max:44.624 - callsite(2013-11-25):
-    $author = User::find($guide->authorid);
+{% highlight php startinline %}
+// avg:0.921 count:8457 sum:7792.918 std:2.332 min:0 max:44.624 - callsite(2013-11-25):
+$author = User::find($guide->authorid);
+{% endhighlight %}
 
 Every few months we turn on the recording of these stats for a day, aggregate
 them and replace the existing stats in our entire codebase. The stats recording
@@ -51,7 +59,7 @@ stats with new aggregated numbers is another single command.
 1. php-call-site-stats examines a stack trace, walks back up the stack and
    records the first .php file after leaving the current class (i.e. the calling
    class).
-1. A line like: "/path/to/file.php:241 cache-get 1 0" is written to the log
+1. A line like: `/path/to/file.php:241 cache-get 1 0` is written to the log
 1. Logging is turned off and the all the log files are concatenated.
 1. The [summarize] tool is used to aggregate by call-site
    (file/path:linenumber)

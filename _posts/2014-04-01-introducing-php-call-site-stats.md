@@ -14,7 +14,7 @@ and it's been a great asset to our team. We hope you find it useful as well.
 # What We Get
 
 The [php-call-site-stats] project has enabled us to provide information like
-mean,min,max,std-dev of the execution time for each and every place in our code
+mean, min, max, std-dev of the execution time for each and every place in our code
 base where we make a database query. Note: units are in milliseconds and these
 stats were collected over a 24-hour period.
 
@@ -63,7 +63,7 @@ stats with new aggregated numbers is another single command.
 1. Logging is turned off and the all the log files are concatenated.
 1. The [summarize] tool is used to aggregate by call-site
    (file/path:linenumber)
-1. summarized results are inserted into source files at the appropiate places
+1. summarized results are inserted into source files at the appropriate places
    via some carefully crafted sed commands.
 
 # How It's Used

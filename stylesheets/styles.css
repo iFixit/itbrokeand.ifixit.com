@@ -1,8 +1,8 @@
 body {
   padding:50px;
-  font:14px/1.8 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 14px/1.7 "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#444;
-  font-weight:300;
+  font-size: 18px;
 }
 
 .post p {
@@ -10,7 +10,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#222;
   margin:0 0 15px;
 }
@@ -30,15 +29,12 @@ li > ul {
 }
 
 h1, h2, h3 {
-  line-height:1.1;
-}
-
-h1 {
-  font-size:28px;
+  line-height: 1.2;
 }
 
 h2 {
   color:#393939;
+  font-size: 22px;
 }
 
 h3, h4, h5, h6 {
@@ -47,7 +43,6 @@ h3, h4, h5, h6 {
 
 a {
   color:#39c;
-  font-weight:400;
   text-decoration:none;
 }
 

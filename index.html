@@ -13,11 +13,10 @@ layout: default
        </h2>
        <div class='summary'>
           {% if page.summary %}
-             {{ page.summary | markdownify }}
+             {{ page.summary | markdownify }}...
           {% else %}
-             {{ page.content | truncatewords: 130 }}
+             {{ page.content | truncatewords: 130 }}...
           {% endif %}
-          <a class='more' href="{{ page.url }}">more</a>
        </div>
     </div>
   {% endunless %}

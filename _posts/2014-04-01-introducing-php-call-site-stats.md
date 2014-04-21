@@ -95,6 +95,26 @@ class Cache {
 file_put_contents('cache-gets.log', $cache->getCallSiteStats(), FILE_APPEND);
 {% endhighlight %}
 
+# The Value
+
+This information, stored in comments,
+helps our team make good decisions when
+looking for performance issues,
+refactoring a section of code,
+or ferreting out bugs.
+It can help highlight problems like
+a cache key with a really high miss rate,
+a DB query that is run way too often, takes far too long
+or has a really high variability.
+It's especially helpful when trying to make decisions about caching.
+Questions like:
+*Is this thing worth caching?*,
+*Is this cache effective?*,
+*Is this the appropriate length of time to cache this data?*
+can more readily be answered because
+we have raw data staring us in the face.
+We hope the community finds this project as useful as we have.
+
 [php-call-site-stats]: https://github.com/danielbeardsley/php-call-site-stats 
 [README]: https://github.com/danielbeardsley/php-call-site-stats/blob/master/README.md
 [summarize]: https://github.com/danielbeardsley/php-call-site-stats/blob/master/summarize.php 

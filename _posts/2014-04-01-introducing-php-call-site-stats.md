@@ -45,25 +45,27 @@ And lastly, we get query times for each usage of `::find()` through our ORM.
 $author = User::find($guide->authorid);
 {% endhighlight %}
 
-Every few months we turn on the recording of these stats for a day, aggregate
-them and replace the existing stats in our entire codebase. The stats recording
-incurs minimal overhead for each request (we track it too) with an average
-additional time of 5ms. The process is very automated; Downloading the log from
-each machine and aggregating them is a single command. Replacing existing
-stats with new aggregated numbers is another single command.
+Every few months we turn on the recording of these stats for a day,
+aggregate them and replace the existing stats in our entire codebase.
+The stats recording incurs minimal overhead
+(we track *it* too) with an average additional time of 5ms per request.
+The process is very automated;
+downloading the log from each machine and aggregating them is a single command.
+Replacing existing stats with new aggregated numbers is another single command.
 
 # How It Works
 
-1. Code in your caching layer records a stat
-   `self::recordCallSite("cache-get", $gets = 1, $hit ? 1 : 0);`
+1. Code in your database layer records a stat
+   `self::recordCallSite("dbquery", (microtime(true) - $start) * 1000);`
 1. php-call-site-stats examines a stack trace, walks back up the stack and
    records the first .php file after leaving the current class (i.e. the calling
    class).
-1. A line like: `/path/to/file.php:241 cache-get 1 0` is written to the log
+1. A line like: `/path/to/file.php:241 dbquery 2.325` is written to the log
+   each time a query is made
 1. Logging is turned off and the all the log files are concatenated.
 1. The [summarize] tool is used to aggregate by call-site
    (file/path:linenumber)
-1. summarized results are inserted into source files at the appropriate places
+1. Summarized results are inserted into source files at the appropriate places
    via some carefully crafted sed commands.
 
 # How It's Used
@@ -72,7 +74,7 @@ There's a much more thorough explanation in the [README], but it only takes a
 few lines of code to start logging lots of useful data:
 
 Imagine you have a `Cache` class, decorate it like this and you'll get a record
-of hits and misses for every place in our code that `$cache->get(...)` is
+of hits and misses for every place in your code that `$cache->get(...)` is
 called.
 {% highlight php startinline %}
 class Cache {

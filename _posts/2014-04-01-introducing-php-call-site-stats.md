@@ -104,7 +104,7 @@ refactoring a section of code,
 or ferreting out bugs.
 It can help highlight problems like
 a cache key with a really high miss rate,
-a DB query that is run way too often, takes far too long
+a DB query that is run way too often, takes far too long,
 or has a really high variability.
 It's especially helpful when trying to make decisions about caching.
 Questions like:

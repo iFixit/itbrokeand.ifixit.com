@@ -1,6 +1,6 @@
 ---
 layout: with-comments
-title: "How we use php-call-site-stats to get cache hit ratios per key"
+title: "How we use php-call-site-stats to get cache hit ratios for each call-site"
 author: Daniel Beardsley
 author_url: https://github.com/danielbeardsley
 summary: We use the php call-site-stats utility to collect and analyze cache

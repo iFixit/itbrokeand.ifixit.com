@@ -14,31 +14,32 @@ and it's been a great asset to our team. We hope you find it useful as well.
 # What We Get
 
 The [php-call-site-stats] project has enabled us to provide information like
-mean, min, max, std-dev of the execution time for each and every place in our code
-base where we make a database query. Note: units are in milliseconds and these
-stats were collected over a 24-hour period.
+mean, min, max, std-dev of the execution time for each and every database query 
+in our code. The gathered data is then inserted in our code, just above the query
+execution. Note: units are in milliseconds and these stats were collected over
+a 24-hour period.
 
 {% highlight php startinline %}
 // avg:1.328 count:111 sum:147.361 std:3.753 min:0.465 max:35.607 - callsite(2013-11-25):
 $db->execute($q_insert, array(T_S, $text, T_S, $tagtype));
 {% endhighlight %}
 
-Hit ratios for all of our cache gets: (diff is the number of misses)
+We also get hit ratios for all of our cache gets (diff is the number of misses):
 
 {% highlight php startinline %}
 // diff:476696 1508814 / 1985510 = 75.99% - callsite(2013-11-25):
 if (($reputation = $cache->get($key)) === false) {
 {% endhighlight %}
 
-Cache replacement times for each `set()` (i.e. time between a get
-with a cache miss and the following `set()` of the same key)
+Cache replacement times for each `set()` (i.e. the time between a get
+with a cache miss and the following `set()` of the same key):
 
 {% highlight php startinline %}
 // avg:69.28 count:158 sum:10947.06 std:12.56 min:51.95 max:149.79 - callsite(2013-11-25):
 $cache->set($key, $device, CACHE_SHORT);
 {% endhighlight %}
 
-And lastly, we get query times for each usage of `::find()` through our ORM.
+And lastly, we get query times for each usage of `::find()` through our ORM:
 
 {% highlight php startinline %}
 // avg:0.921 count:8457 sum:7792.918 std:2.332 min:0 max:44.624 - callsite(2013-11-25):
@@ -66,7 +67,7 @@ Replacing existing stats with new aggregated numbers is another single command.
 1. The [summarize] tool is used to aggregate by call-site
    (file/path:linenumber)
 1. Summarized results are inserted into source files at the appropriate places
-   via some carefully crafted sed commands.
+   via some carefully crafted `sed` commands.
 
 # How It's Used
 
@@ -97,7 +98,7 @@ file_put_contents('cache-gets.log', $cache->getCallSiteStats(), FILE_APPEND);
 
 # The Value
 
-This information, stored in comments,
+This information stored in inline comments
 helps our team make good decisions when
 looking for performance issues,
 refactoring a section of code,
@@ -109,7 +110,7 @@ or has a really high variability.
 It's especially helpful when trying to make decisions about caching.
 Questions like:
 *Is this thing worth caching?*,
-*Is this cache effective?*,
+*Is this cache effective?*, and
 *Is this the appropriate length of time to cache this data?*
 can more readily be answered because
 we have raw data staring us in the face.

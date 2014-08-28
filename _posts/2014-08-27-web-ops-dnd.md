@@ -73,7 +73,7 @@ etc.
 # Results
 
 After going through a few instances, separated by several weeks, engineers seem
-to have a better grasp on our architecture and the process for tracing down
+to have a better grasp on our architecture and the process for tracking down
 common issues.  Thankfully, we haven't had any unfortunately-timed outages to
 force a real-world test of this knowledge yet, but even what we've gotten is
 useful for better systems design.

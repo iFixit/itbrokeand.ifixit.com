@@ -3,7 +3,7 @@ layout: with-comments
 title: "Web Operations D&D"
 author: James Pearson
 author_url: https://github.com/xiongchiamiov
-summary: One of the most obvious, although hopefully infrequent, responbilities
+summary: One of the most obvious, although hopefully infrequent, responsibilities
          of a Web Operations Engineer is firefighting - diagnosing issues that
          are critically affecting production services.  Unfortunately, most of
          us are pretty bad at it, since every situation is different and the
@@ -11,7 +11,7 @@ summary: One of the most obvious, although hopefully infrequent, responbilities
          program to help with this, known as "Web Ops D&D".
 ---
 
-One of the most obvious, although hopefully infrequent, responbilities of a Web
+One of the most obvious, although hopefully infrequent, responsibilities of a Web
 Operations Engineer is firefighting - diagnosing issues that are critically
 affecting production services.  Unfortunately, most of us are pretty bad at it,
 since every situation is different and the only time we pratice is "on the

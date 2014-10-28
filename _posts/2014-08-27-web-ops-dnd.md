@@ -6,15 +6,15 @@ author_url: https://github.com/xiongchiamiov
 summary: One of the most obvious, although hopefully infrequent, responsibilities
          of a Web Operations Engineer is firefighting - diagnosing issues that
          are critically affecting production services.  Unfortunately, most of
-         us are pretty bad at it, since every situation is different and the
-         only time we pratice is "on the job".  At iFixit, we've started a
+         us are pretty bad at it because every situation is different and the
+         only time we practice is "on the job."  At iFixit, we've started a
          program to help with this, known as "Web Ops D&D".
 ---
 
 One of the most obvious, although hopefully infrequent, responsibilities of a Web
 Operations Engineer is firefighting - diagnosing issues that are critically
-affecting production services.  Unfortunately, most of us are pretty bad at it,
-since every situation is different and the only time we pratice is "on the
+affecting production services.  Unfortunately, most of us are pretty bad at it
+because every situation is different and the only time we practice is "on the
 job".  At iFixit, we've started a program to help with this, known as "Web Ops
 [D&D]".
 
@@ -38,15 +38,15 @@ to create.  Here's an example card:
 > when syslog bounced it.
 
 The trigger is the only thing the DM provides to the players at the start; it
-is whatever would cause us to realize there is a problem.
+is whatever would cause us to realize that there is a problem.
 
-For engineers unused to this sort of troubleshooting, it can be a bit
+For engineers unfamiliar to this sort of troubleshooting, it can be a bit
 disorienting to start.  I found it's helpful to cover the basics of [the OODA
 loop] and include one or two engineers in the group who have gone through the
 activity before.
 
 From there on, the DM's primary role is to answer questions without giving any
-hints.  For instance, if the players ask "What does 'mysql show processlist'
+hints.  For instance, if the players ask "What does `mysql show processlist`
 show?", "There are lots of queries stacked up" is a bad answer; "There are 129
 rows; 80% of them are in the query state with a time of 80 or more, while the
 rest are sleeping" is better.  Additionally, the players need to know *how* to

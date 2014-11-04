@@ -40,7 +40,7 @@ to create.  Here's an example card:
 The trigger is the only thing the DM provides to the players at the start; it
 is whatever would cause us to realize that there is a problem.
 
-For engineers unfamiliar to this sort of troubleshooting, it can be a bit
+For engineers unfamiliar with this sort of troubleshooting, it can be a bit
 disorienting to start.  I found it's helpful to cover the basics of [the OODA
 loop] and include one or two engineers in the group who have gone through the
 activity before.

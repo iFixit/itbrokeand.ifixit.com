@@ -108,8 +108,8 @@ Similarly, `getAndSetMultiple` makes doing multi-gets significantly easier:
 // Array of key => id. The id's can be anything used to identify
 // the resource that the key represents.
 $keys = [
-   'key1' => ['id1a', 'id1b'],
-   'key2' => ['id2a', 'id2b']
+   'key-1-a' => [1, 'a'],
+   'key-2-b' => [2, 'b']
 ];
 // Calls the provided callback for any missed keys so the missing
 // values can be generated and set before returning them to the

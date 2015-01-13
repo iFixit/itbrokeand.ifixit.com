@@ -105,7 +105,6 @@ $value = $cache->getAndSet('key', function() {
 Similarly, `getAndSetMultiple` makes doing multi-gets significantly easier:
 
 {% highlight php startinline=true %}
-$cache = new Matryoshka\Ephemeral();
 // Array of key => id. The id's can be anything used to identify
 // the resource that the key represents.
 $keys = [

@@ -70,7 +70,7 @@ $cache = new Matryoshka\Scope($memcachedBackend, 'name');
 // then results in a key of '0fb4ae36-key'.
 $cache->set('key', 'value');
 $cache->set('key2', 'value2');
-$value = $cache->get('key'); // '0fb4ae36-key2' => 'value'
+$value = $cache->get('key'); // '0fb4ae36-key' => 'value'
 
 // Deleting the scope results in a new scope value e.g. 'e093f71e'.
 $cache->deleteScope();

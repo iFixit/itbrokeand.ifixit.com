@@ -105,7 +105,7 @@ $value = $cache->getAndSet('key', function() {
 Similarly, `getAndSetMultiple` makes doing multi-gets significantly easier:
 
 {% highlight php startinline=true %}
-// Array of key => id. The id's can be anything used to identify
+// Array of key => id. The ids can be anything used to identify
 // the resource that the key represents.
 $keys = [
    'key-1-a' => [1, 'a'],
@@ -116,7 +116,7 @@ $keys = [
 // caller. The values are returned in the same order as the
 // provided keys.
 $values = $cache->getAndSetMultiple($keys, function($missing) {
-   // Use the id's to fill in the missing values.
+   // Use the ids to fill in the missing values.
    foreach ($missing as $key => $primaryKey) {
       $missing[$key] = getValueFromDb($primaryKey);
    }

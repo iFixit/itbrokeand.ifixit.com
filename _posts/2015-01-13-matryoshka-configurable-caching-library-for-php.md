@@ -94,7 +94,6 @@ Matryoshka adds a few helper functions to make common operations easier.
 `getAndSet` makes populating the cache dead simple:
 
 {% highlight php startinline=true %}
-$cache = new Matryoshka\Ephemeral();
 // Calls the provided callback if the key is not found and sets
 // it in the cache before returning the value to the caller.
 $value = $cache->getAndSet('key', function() {

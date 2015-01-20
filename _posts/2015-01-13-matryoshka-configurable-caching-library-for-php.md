@@ -11,7 +11,7 @@ summary: We recently open-sourced Matryoshka&#58; a configurable caching library
 Like most websites, we make heavy use of caching to reduce load on our servers and decrease page response times.
 Our caching daemon of choice is [memcached].
 The PHP extensions are certainly usable and provide all of the core functionality that you could need.
-However, we use a lot of patterns to make our day to day caching much easier that aren't provided by the extensions.
+However, we use a lot of patterns to make our day-to-day caching much easier that aren't provided by the extensions.
 
 One tool that we wrote is [Matryoshka]&#58; an open source caching library for PHP which makes common operations easier and allows for on-the-fly configuration.
 

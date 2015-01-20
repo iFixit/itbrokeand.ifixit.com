@@ -77,6 +77,10 @@ code, pre, .gist{
   line-height:1.4em;
 }
 
+p code {
+   font-size: 14px;
+}
+
 pre {
   padding:8px 15px;
   background: #f8f8f8;  

@@ -3,7 +3,7 @@ layout: with-comments
 title: "Matryoshka: A Configurable Caching Library for PHP"
 author: Marc Zych
 author_url: https://github.com/marczych
-summary: We recently open-sourced Matryoshka, a configurable caching library
+summary: We recently open-sourced Matryoshka&#58; a configurable caching library
          for PHP which makes common operations easier and allows for on-the-fly
          configuration.
 ---
@@ -13,13 +13,13 @@ Our caching daemon of choice is [memcached].
 The PHP extensions are certainly usable and provide all of the core functionality that you could need.
 However, we use a lot of patterns to make our day to day caching much easier that aren't provided by the extensions.
 
-In comes [Matryoshka], an open source caching library for PHP which makes common operations easier and allows for on-the-fly configuration.
+One tool that we wrote is [Matryoshka]&#58; an open source caching library for PHP which makes common operations easier and allows for on-the-fly configuration.
 
 # Configurable Behavior
 
 Matryoshka is designed to be very configurable.
 You can add functionality on the fly simply by wrapping an existing `Backend` with a new one.
-We use this extensively to prefix keys, modify expiration times, disable gets, gather metrics, etc.
+We use this extensively to prefix keys, modify expiration times, disable cache gets, gather metrics, etc.
 
 Start off with a `Memcache` instance:
 
@@ -83,10 +83,14 @@ $value2 = $cache->get('key2'); // 'e093f71e-key2' => false
 
 We have found this to be particularly useful for scoping keys to code deploys.
 We simply put any caches that should be invalidated under the `'deploy'` scope which is deleted anytime we deploy code.
-You can also have dynamic scopes such as `"post-{$postid}"` which can be cleared anytime a specific post is modified.
-This is an implementation of [generational caching] which we make [heavy use of][caching thesis] throughout our application.
 
-Cache scopes help with cache invalidation but unfortunately don't make [naming things] any easier.
+Cache keys can also have dynamic scopes.
+In a generic example of a blog with posts, your scope name could be `"post-{$postid}"`.
+Then, all keys using a particular `$postid` prefix can be cleared anytime that specific post is modified.
+
+Cache scopes are an implementation of [generational caching], which we make [heavy use of][caching thesis] throughout our application.
+
+Note: Cache scopes help with cache invalidation but they unfortunately don't make [naming things] any easier.
 
 # Helper Functions
 

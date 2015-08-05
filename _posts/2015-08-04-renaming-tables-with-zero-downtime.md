@@ -48,7 +48,7 @@ RENAME TABLE
 DROP VIEW `users_old_view`;
 {% endhighlight %}
 
-And just like that we have renamed the table without any loss of availability.
+And just like that we have renamed the table with zero downtime.
 
 # Caveats
 

@@ -66,7 +66,7 @@ Also, we discovered one minor difference between the table and the view: the pri
 Our ORM uses this information to build its model of the object so it can generate queries to interact with the underlying table.
 Fortunately, we could easily provide the information it needed in code while the view was in use so it wouldn't have to look it up in the information schema table at all.
 
-There may be more differences between tables and views that we didn't come across so exercise caution and do thorough testing before using them in production.
+There may be more differences between tables and views that we didn't come across, so exercise caution and do thorough testing before using them in production.
 
 # Conclusion
 

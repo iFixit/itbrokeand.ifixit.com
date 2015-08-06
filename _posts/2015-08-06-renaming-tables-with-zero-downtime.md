@@ -32,7 +32,7 @@ CREATE VIEW `users` AS SELECT * FROM `people`;
 
 # Updating Queries in Code
 
-Now that we have a view that acts just like a proper table, we can deploy the code that updates all queries to reference `users` instead of `people`.
+Because the view acts just like a proper table, we can deploy the code that updates all queries to reference `users` instead of `people`.
 All actions, including writes, proxy through to the underlying table, `people`.
 
 # Replacing the View With the Table

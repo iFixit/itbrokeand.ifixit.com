@@ -23,7 +23,7 @@ I discovered that [many MySQL Views are updatable and insertable][updatable view
 
 > Some views are updatable and references to them can be used to specify tables to be updated in data change statements. That is, you can use them in statements such as UPDATE, DELETE, or INSERT to update the contents of the underlying table.
 
-This is super cool because it means that _all_ of the queries, reads and writes, can be done against the new name.
+This is super cool because it means that _all_ of the queries, both reads and writes, can be done against the new name.
 Here we create a view with the new name that we want to end up with:
 
 {% highlight mysql %}

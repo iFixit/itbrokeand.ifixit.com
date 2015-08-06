@@ -19,7 +19,7 @@ In this example, we will be renaming `people` to `users`.
 # Using a View
 
 The first thing I came up with was using [MySQL Views] to alias the table so it would be accessible by both names (`people` and `users`).
-I came to find out that [many MySQL Views are updatable and insertable][updatable views]:
+I discovered that [many MySQL Views are updatable and insertable][updatable views]:
 
 > Some views are updatable and references to them can be used to specify tables to be updated in data change statements. That is, you can use them in statements such as UPDATE, DELETE, or INSERT to update the contents of the underlying table.
 

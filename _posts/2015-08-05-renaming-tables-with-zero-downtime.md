@@ -70,7 +70,7 @@ There may be more differences between tables and views that we didn't come acros
 
 # Conclusion
 
-All of the SQL commands were nearly instantaneous and worked flawlessly when used on a fairly large table with a modest number of reads and writes.
+All of the SQL commands were nearly instantaneous and flawlessly renamed one of our most frequently accessed tables.
 Consider using this approach if you are running MySQL and have some tables that need to be renamed.
 
 Happy table renaming!

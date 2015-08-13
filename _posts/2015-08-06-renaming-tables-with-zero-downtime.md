@@ -12,7 +12,7 @@ Sometimes you end up with tables in your database schema that just aren't named 
 At first glance, renaming them without any downtime isn't feasible because updating the code that uses the table at the same instant that the table is renamed isn't easily accomplished.
 
 We recently came across a few database tables in our schema that were begging to be renamed.
-Bringing our site down for several minutes to run the migrations and deploy the updated code was unacceptable so I started investigating to come up with a solution.
+Bringing our site down for several minutes to run the migrations and deploy the updated code was unacceptable, so I started investigating to come up with a solution.
 
 In this example, we will be renaming `people` to `users`.
 
